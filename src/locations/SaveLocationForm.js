@@ -10,6 +10,8 @@ function SaveLocationForm(apiResponse) {
     stateName: apiResponse.apiResponse.locationData.stateName,
     prov: apiResponse.apiResponse.locationData.prov,
     countryName: apiResponse.apiResponse.locationData.countryName,
+    longt:apiResponse.apiResponse.locationData.longt,
+    latt:apiResponse.apiResponse.locationData.latt,
   };
   console.log("save location form", apiResponse);
   const { currentUser } = useContext(UserContext);
