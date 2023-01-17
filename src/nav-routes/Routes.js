@@ -5,6 +5,8 @@ import SignupForm from "../auth/SignupForm";
 import LoginForm from "../auth/LoginForm";
 import NewLocation from "../locations/NewLocation";
 import ProtectedRoute from "./ProtectedRoute";
+import SavedLocationsList from "../locations/SavedLocationsList";
+import LocationDetails from "../locations/LocationDetails";
 
 /** Site-wide routes.
  *
@@ -30,6 +32,14 @@ function Routes({ login, register }) {
 
       <ProtectedRoute exact path="/newLocation">
         <NewLocation />
+      </ProtectedRoute>
+
+      <ProtectedRoute exact path="/location/:username/:id">
+        <LocationDetails />
+      </ProtectedRoute>
+
+      <ProtectedRoute exact path="/locations">
+        <SavedLocationsList />
       </ProtectedRoute>
 
       <Redirect to="/" />

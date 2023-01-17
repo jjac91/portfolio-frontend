@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
 import UserContext from "../auth/UserContext";
 import WeatherApi from "../api/api";
+import { useHistory } from "react-router-dom";
 
 function SaveLocationForm(apiResponse) {
+  const history = useHistory();
   const initialData = {
     stNumber: apiResponse.apiResponse.locationData.stNumber,
     addressSt: apiResponse.apiResponse.locationData.addressSt,
@@ -24,6 +26,7 @@ function SaveLocationForm(apiResponse) {
     try {
       let res = await WeatherApi.postNewLocation(currentUser.username, data);
       console.log(data, res);
+      history.push("/locations")
     } catch (errors) {
       console.error("post failed", errors);
     }

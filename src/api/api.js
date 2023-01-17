@@ -63,6 +63,20 @@ class WeatherApi {
     let res = await this.request(`location/${username}`, data, "post");
     return res.apiResponse;
   }
+
+   /** Get Saved Location */
+   static async getLocation(username, id) {
+    let res = await this.request(`location/${username}/${id}`);
+    console.log("api", res.location)
+    return res.location;
+  }
+
+  /** Get Weather */
+  static async getWeather(lat, lon) {
+    let res = await this.request(`weather?lat=${lat}&lon=${lon}`);
+    console.log("api", res)
+    return res;
+  }
 }
 
 export default WeatherApi;
