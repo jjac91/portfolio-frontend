@@ -2,14 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import WeatherApi from "../api/api";
 
-/** Company Detail page.
- *
- * Renders information about company, along with the jobs at that company.
- *
- * Routed at /companies/:handle
- *
- * Routes -> CompanyDetail -> JobCardList
- */
 
 function LocationDetails() {
   const { username, id } = useParams();

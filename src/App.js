@@ -21,7 +21,6 @@ import jwt from "jsonwebtoken";
 function App() {
   const [token, setToken] = useLocalStorage("token");
   const [currentUser, setCurrentUser] = useState(null);
-  const [locationIds, setLocationids] = useState([]);
 
   /** Loads user info from API. Will not run until a user is logged in
    *  and has a token. It should only need to rerun if a user logs out
@@ -35,7 +34,6 @@ function App() {
           WeatherApi.token = token;
           let currentUser = await WeatherApi.getUser(username);
           setCurrentUser(currentUser);
-          setLocationids([...currentUser.locations]);
         } catch (error) {
           console.error(error);
           setCurrentUser(null);

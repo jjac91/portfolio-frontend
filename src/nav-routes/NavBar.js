@@ -31,6 +31,9 @@ function NavBar({ logout }) {
           <Link className="nav-link" to="/" onClick={logout}>
             Log out {currentUser.username}
           </Link>
+          {/* <Link className="nav-link" to="/profile">
+            {currentUser.username}'s profile
+          </Link> */}
         </li>
       </ul>
     );

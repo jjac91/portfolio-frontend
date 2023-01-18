@@ -67,14 +67,18 @@ class WeatherApi {
    /** Get Saved Location */
    static async getLocation(username, id) {
     let res = await this.request(`location/${username}/${id}`);
-    console.log("api", res.location)
     return res.location;
+  }
+
+  /** Delete Location */
+  static async deleteLocation(username,id) {
+    let res = await this.request(`location/${username}/${id}`, {}, "delete");
+    return res;
   }
 
   /** Get Weather */
   static async getWeather(lat, lon) {
     let res = await this.request(`weather?lat=${lat}&lon=${lon}`);
-    console.log("api", res)
     return res;
   }
 }
