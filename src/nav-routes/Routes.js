@@ -17,33 +17,35 @@ import LocationDetails from "../locations/LocationDetails";
  */
 function Routes({ login, register }) {
   return (
-    <Switch>
-      <Route exact path="/">
-        <Home />
-      </Route>
+    <div className="pt-5">
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
 
-      <Route exact path="/signup">
-        <SignupForm register={register} />
-      </Route>
+        <Route exact path="/signup">
+          <SignupForm register={register} />
+        </Route>
 
-      <Route exact path="/login">
-        <LoginForm login={login} />
-      </Route>
+        <Route exact path="/login">
+          <LoginForm login={login} />
+        </Route>
 
-      <ProtectedRoute exact path="/newLocation">
-        <NewLocation />
-      </ProtectedRoute>
+        <ProtectedRoute exact path="/newLocation">
+          <NewLocation />
+        </ProtectedRoute>
 
-      <ProtectedRoute exact path="/location/:username/:id">
-        <LocationDetails />
-      </ProtectedRoute>
+        <ProtectedRoute exact path="/location/:username/:id">
+          <LocationDetails />
+        </ProtectedRoute>
 
-      <ProtectedRoute exact path="/locations">
-        <SavedLocationsList />
-      </ProtectedRoute>
+        <ProtectedRoute exact path="/locations">
+          <SavedLocationsList />
+        </ProtectedRoute>
 
-      <Redirect to="/" />
-    </Switch>
+        <Redirect to="/" />
+      </Switch>
+    </div>
   );
 }
 

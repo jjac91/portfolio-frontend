@@ -1,34 +1,52 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Label } from "reactstrap";
+import React, { useState } from "react";
 import WeatherApi from "../api/api";
+import LoadingSpinner from "../common/LoadingSpinner";
 import SearchForm from "../common/SearchForm";
 import SaveLocationForm from "./SaveLocationForm";
 
 function NewLocation() {
+  const [loaded, setLoaded] = useState(true);
   const [apiResponse, setApiResponse] = useState(null);
+  const [hasError, setHasError] = useState(false);
 
   /**Calls the api to search for location info */
   async function search(name) {
-    let apiResponse = await WeatherApi.getNewLocation(name);
-    setApiResponse(apiResponse);
+    setLoaded(false);
+    try {
+      let apiResponse = await WeatherApi.getNewLocation(name);
+      setApiResponse(apiResponse);
+    } catch {
+      setHasError(true);
+    }
+    setLoaded(true);
   }
 
   /**Handles the response from the backend backend query
    * Either handle the error or shows the addresss
    */
   function handleSearchResult(apiResponse) {
+    if (hasError === true) {
+      return (
+        <div>
+          <p className= "lead mb-3 mt-1.5 ml-3 mr-3 font-weight-bold">Unable to process the request, please try again later.</p>
+        </div>
+      );
+    }
     return apiResponse.error ? (
       <div>
-        <p>{handleSearchError(apiResponse.error.code)}</p>
+        <p className= "lead mb-3 mt-1.5 ml-3 mr-3 font-weight-bold">{handleSearchError(apiResponse.error.code)}</p>
       </div>
     ) : (
       <div>
-        <p>
-          Is {handleLocationName(apiResponse)} correct? If it is, give it a name
-          to save it by.
+        <p className= "lead mb-3 mt-1.5 ml-3 mr-3 font-weight-bold">
+          Does {handleLocationName(apiResponse)} look correct? If it is, give it
+          a name to save it by.
         </p>
         <div>
-            <SaveLocationForm apiResponse={apiResponse}/>
+          <SaveLocationForm
+            apiResponse={apiResponse}
+            placeHolder={"Name this location"}
+          />
         </div>
       </div>
     );
@@ -55,11 +73,18 @@ function NewLocation() {
     ];
     return values.join(" ");
   }
+  if (!loaded) return <LoadingSpinner />;
 
   return (
-    <div className="NewLocation">
-      <SearchForm searchFor={search} />
-      {apiResponse ? handleSearchResult(apiResponse) : <div />}
+    <div className="NewLocation col-md-8 offset-md-2">
+      <div className="card">
+        <h2 className="mb-3 mt-3 ml-3 mr-3">Add a New Location to Track</h2>
+        <p className="lead mb-3 mt-3 ml-3 mr-3 font-weight-bold">
+          Look up an address, city, or region in order to track its weather
+        </p>
+        <SearchForm searchFor={search} placeHolder={"Enter location here"} />
+        {apiResponse ? handleSearchResult(apiResponse) : <div />}
+      </div>
     </div>
   );
 }

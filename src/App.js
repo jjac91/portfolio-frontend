@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
-import "./App.css";
 import Routes from "./nav-routes/Routes";
 import NavBar from "./nav-routes/NavBar";
 import UserContext from "./auth/UserContext";
 import WeatherApi from "./api/api";
 import useLocalStorage from "./hooks/UseLocalStorage";
 import jwt from "jsonwebtoken";
+import LoadingSpinner from "./common/LoadingSpinner";
 
 /** Weather application
  *
@@ -19,6 +19,7 @@ import jwt from "jsonwebtoken";
  */
 
 function App() {
+  const [loaded, setLoaded] = useState(false)
   const [token, setToken] = useLocalStorage("token");
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -39,7 +40,9 @@ function App() {
           setCurrentUser(null);
         }
       }
+      setLoaded(true)
     }
+    setLoaded(false)
     getCurrentUser();
   }, [token]);
 
@@ -76,6 +79,7 @@ function App() {
     setCurrentUser(null);
   }
 
+  if(!loaded) return <LoadingSpinner/>
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ currentUser, setCurrentUser }}>

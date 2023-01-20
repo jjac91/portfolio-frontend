@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Alert, Card, CardBody, CardTitle, Button } from "reactstrap";
+import Alert from "../common/Alert";
 
-function LoginForm({login}) {
+function LoginForm({ login }) {
   const history = useHistory();
   const [formData, setFormData] = useState({
     username: "",
@@ -24,41 +24,55 @@ function LoginForm({login}) {
       setFormErrors(result.errors);
     }
   }
+
   return (
     <div className="LoginForm">
-      <Card>
-        <CardBody className="text-center">
-          <CardTitle>
-            <h3 className="font-weight-bold">Login</h3>
-          </CardTitle>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="username">User Name:</label>
-            <input
-              id="username"
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-            />
-            <br />
-            <label htmlFor="password">Password:</label>
-            <input
-              id="password"
-              type="text"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-            <br />
-            {formErrors.length ? (
-              <Alert type="danger" messages={formErrors} />
-            ) : null}
-            <button id="loginButton">Log In</button>
-          </form>
-        </CardBody>
-      </Card>
+      <div className="container col-md-6 col-lg-4">
+        <h3 className="mb-3">Log In</h3>
+
+        <div className="card">
+          <div className="card-body">
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>Username</label>
+                <input
+                  name="username"
+                  className="form-control"
+                  value={formData.username}
+                  onChange={handleChange}
+                  autoComplete="username"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  className="form-control"
+                  value={formData.password}
+                  onChange={handleChange}
+                  autoComplete="current-password"
+                  required
+                />
+              </div>
+
+              {formErrors.length ? (
+                <Alert type="danger" messages={formErrors} />
+              ) : null}
+
+              <button
+                className="btn btn-primary float-right"
+                onSubmit={handleSubmit}
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
-export default LoginForm
+export default LoginForm;

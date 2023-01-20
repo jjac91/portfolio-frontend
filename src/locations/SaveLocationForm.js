@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import UserContext from "../auth/UserContext";
 import WeatherApi from "../api/api";
 import { useHistory } from "react-router-dom";
+import Alert from "../common/Alert";
 
 function SaveLocationForm(apiResponse) {
   const history = useHistory();
@@ -12,8 +13,8 @@ function SaveLocationForm(apiResponse) {
     stateName: apiResponse.apiResponse.locationData.stateName,
     prov: apiResponse.apiResponse.locationData.prov,
     countryName: apiResponse.apiResponse.locationData.countryName,
-    longt:apiResponse.apiResponse.locationData.longt,
-    latt:apiResponse.apiResponse.locationData.latt,
+    longt: apiResponse.apiResponse.locationData.longt,
+    latt: apiResponse.apiResponse.locationData.latt,
   };
   console.log("save location form", apiResponse);
   const { currentUser } = useContext(UserContext);
@@ -26,8 +27,9 @@ function SaveLocationForm(apiResponse) {
     try {
       let res = await WeatherApi.postNewLocation(currentUser.username, data);
       console.log(data, res);
-      history.push("/locations")
+      history.push("/locations");
     } catch (errors) {
+      setFormErrors(errors)
       console.error("post failed", errors);
     }
   }
@@ -37,7 +39,7 @@ function SaveLocationForm(apiResponse) {
   }
 
   return (
-    <div className="SearchForm mb-4">
+    <div className="SearchForm mb-3 mt-1.5 ml-3 mr-3">
       <form className="form-inline" onSubmit={handleSubmit}>
         <input
           className="form-control form-control-lg flex-grow-1"
@@ -46,6 +48,9 @@ function SaveLocationForm(apiResponse) {
           value={label}
           onChange={handleChange}
         />
+        {formErrors.length ? (
+          <Alert type="danger" messages={formErrors} />
+        ) : null}
         <button type="submit" className="btn btn-lg btn-primary">
           Submit
         </button>

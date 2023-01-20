@@ -9,7 +9,7 @@ import React, { useState } from "react";
  * searchFor function provided by a parent component.
  */
 
-function SearchForm({ searchFor }) {
+function SearchForm({ searchFor, placeHolder }) {
   console.debug("SearchForm", "searchFor=", typeof searchFor);
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,12 +26,12 @@ function SearchForm({ searchFor }) {
   }
 
   return (
-    <div className="SearchForm mb-4">
+    <div className="SearchForm mb-3 mt-1.5 ml-3 mr-3">
       <form className="form-inline" onSubmit={handleSubmit}>
         <input
           className="form-control form-control-lg flex-grow-1"
           name="searchTerm"
-          placeholder="Enter search term.."
+          placeholder={placeHolder}
           value={searchTerm}
           onChange={handleChange}
         />

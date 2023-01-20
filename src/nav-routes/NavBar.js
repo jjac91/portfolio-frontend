@@ -31,9 +31,6 @@ function NavBar({ logout }) {
           <Link className="nav-link" to="/" onClick={logout}>
             Log out {currentUser.username}
           </Link>
-          {/* <Link className="nav-link" to="/profile">
-            {currentUser.username}'s profile
-          </Link> */}
         </li>
       </ul>
     );
@@ -58,28 +55,11 @@ function NavBar({ logout }) {
   return (
     <nav className="Navigation navbar navbar-expand-md">
       <Link className="navbar-brand" to="/">
-        Weatherly
+        Weather Advisor
       </Link>
       {currentUser ? loggedInNav() : loggedOutNav()}
     </nav>
   );
 }
-
-//   <div>
-//   <Navbar expand="md">
-//     <NavLink exact to="/" className="navbar-brand">
-//       The App
-//     </NavLink>
-
-//     <Nav className="ml-auto" navbar>
-//     <NavItem>
-//         <NavLink to="/login">Login</NavLink>
-//       </NavItem>
-//       <NavItem>
-//         <NavLink to="/signgup">Sign Up</NavLink>
-//       </NavItem>
-//     </Nav>
-//   </Navbar>
-// </div>
 
 export default NavBar;

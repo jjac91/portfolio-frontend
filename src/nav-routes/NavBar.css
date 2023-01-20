@@ -1,38 +1,14 @@
-nav {
-  background-color: white;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+.Navigation {
+  background-color: rgba(88, 125, 180, 0.808);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.125);
 }
-
-.nav-item {
-  width: 100px;
-  text-align: center;
+.navbar-brand{
+  color: aqua;
 }
-
-nav a {
+.nav-link{
+  color: aqua;
+}
+.nav-link.active {
+  font-weight: bold;
   color: black;
-  text-decoration: none;
-  font-weight: bold;
-  box-sizing: border-box;
-}
-
-nav a.active {
-  color: blue;
-
-}
-
-/* nav a.active:hover {
-  color: #f0f2f5 !important;
-} */
-
-nav a:hover {
-  text-decoration: none;
-  color: gold;
-}
-
-nav a.active.navbar-brand {
-  border-bottom: none;
-}
-
-nav a:not(.navbar-brand):hover {
-  font-weight: bold;
 }
