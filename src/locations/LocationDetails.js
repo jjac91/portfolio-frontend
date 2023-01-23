@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import WeatherApi from "../api/api";
 import LoadingSpinner from "../common/LoadingSpinner";
+import Alert from "../common/Alert";
 
 function LocationDetails() {
   const { username, id } = useParams();
@@ -45,9 +46,10 @@ function LocationDetails() {
 
   if (hasError === true) {
     return (
-      <div>
-        <p>Unable to process the request, please try again later.</p>
-      </div>
+      <Alert
+      type="danger"
+      messages={["Unable to process the request, please try again later."]}
+    />
     );
   }
 

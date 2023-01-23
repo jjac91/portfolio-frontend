@@ -3,6 +3,7 @@ import WeatherApi from "../api/api";
 import LoadingSpinner from "../common/LoadingSpinner";
 import SearchForm from "../common/SearchForm";
 import SaveLocationForm from "./SaveLocationForm";
+import Alert from "../common/Alert";
 
 function NewLocation() {
   const [loaded, setLoaded] = useState(true);
@@ -15,7 +16,8 @@ function NewLocation() {
     try {
       let apiResponse = await WeatherApi.getNewLocation(name);
       setApiResponse(apiResponse);
-    } catch {
+    } catch(err) {
+      console.error(err)
       setHasError(true);
     }
     setLoaded(true);
@@ -25,13 +27,6 @@ function NewLocation() {
    * Either handle the error or shows the addresss
    */
   function handleSearchResult(apiResponse) {
-    if (hasError === true) {
-      return (
-        <div>
-          <p className= "lead mb-3 mt-1.5 ml-3 mr-3 font-weight-bold">Unable to process the request, please try again later.</p>
-        </div>
-      );
-    }
     return apiResponse.error ? (
       <div>
         <p className= "lead mb-3 mt-1.5 ml-3 mr-3 font-weight-bold">{handleSearchError(apiResponse.error.code)}</p>
@@ -72,6 +67,14 @@ function NewLocation() {
       apiResponse.locationData.countryName,
     ];
     return values.join(" ");
+  }
+  if (hasError === true) {
+    return (
+      <Alert
+      type="danger"
+      messages={["Unable to process the request, please try again later."]}
+    />
+    );
   }
   if (!loaded) return <LoadingSpinner />;
 

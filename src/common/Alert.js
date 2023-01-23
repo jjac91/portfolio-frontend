@@ -1,6 +1,6 @@
 import React from "react";
 
-/**Componet for showing boostrap style alerts */
+/**Component for showing boostrap style alerts */
 
 function Alert({ type = "danger", messages = [] }) {
     console.debug("Alert", "type=", type, "messages=", messages);
