@@ -6,7 +6,9 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^1.2.2",
+    "axios-mock-adapter": "^1.21.2",
     "bootstrap": "^4.6.2",
+    "jest-environment-jsdom-sixteen": "^2.0.0",
     "jsonwebtoken": "^9.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
@@ -16,7 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\" --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

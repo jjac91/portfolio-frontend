@@ -8,17 +8,21 @@ import Alert from "../common/Alert";
 function NewLocation() {
   const [loaded, setLoaded] = useState(true);
   const [apiResponse, setApiResponse] = useState(null);
-  const [hasError, setHasError] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   /**Calls the api to search for location info */
   async function search(name) {
     setLoaded(false);
+    setErrors([])
     try {
       let apiResponse = await WeatherApi.getNewLocation(name);
       setApiResponse(apiResponse);
-    } catch(err) {
-      console.error(err)
-      setHasError(true);
+      if (apiResponse.error) {
+        handleSearchError(apiResponse.error.code);
+      }
+    } catch (err) {
+      console.error(err);
+      setErrors(["Unable to process the request, please try again later."])
     }
     setLoaded(true);
   }
@@ -27,13 +31,9 @@ function NewLocation() {
    * Either handle the error or shows the addresss
    */
   function handleSearchResult(apiResponse) {
-    return apiResponse.error ? (
+    return apiResponse.error ? null : (
       <div>
-        <p className= "lead mb-3 mt-1.5 ml-3 mr-3 font-weight-bold">{handleSearchError(apiResponse.error.code)}</p>
-      </div>
-    ) : (
-      <div>
-        <p className= "lead mb-3 mt-1.5 ml-3 mr-3 font-weight-bold">
+        <p className="lead mb-3 mt-1.5 ml-3 mr-3 font-weight-bold">
           Does {handleLocationName(apiResponse)} look correct? If it is, give it
           a name to save it by.
         </p>
@@ -41,6 +41,7 @@ function NewLocation() {
           <SaveLocationForm
             apiResponse={apiResponse}
             placeHolder={"Name this location"}
+            handleErrorChange ={handleErrorChange}
           />
         </div>
       </div>
@@ -51,9 +52,12 @@ function NewLocation() {
    * api via the backend api
    */
   function handleSearchError(code) {
-    return code === "008" || "007"
-      ? "Unable to find location. Try changing your search term"
-      : "Unable to connect to location database. Please try again later";
+    if (code === "006") {
+      setErrors(["The location server is busy. Please try again in a bit"]);
+    }
+    if (code === "008" || "007") {
+      setErrors(["Unable to find location. Try changing your search term"]);
+    }
   }
 
   /**Formats address data into a clean well formatted string */
@@ -68,14 +72,12 @@ function NewLocation() {
     ];
     return values.join(" ");
   }
-  if (hasError === true) {
-    return (
-      <Alert
-      type="danger"
-      messages={["Unable to process the request, please try again later."]}
-    />
-    );
+
+  /** function to allow child component save location form to set errors to this component  */
+  function handleErrorChange(error){
+    setErrors(error)
   }
+  
   if (!loaded) return <LoadingSpinner />;
 
   return (
@@ -87,6 +89,8 @@ function NewLocation() {
         </p>
         <SearchForm searchFor={search} placeHolder={"Enter location here"} />
         {apiResponse ? handleSearchResult(apiResponse) : <div />}
+
+        {errors.length ? <Alert type="danger" messages={errors} /> : null}
       </div>
     </div>
   );
