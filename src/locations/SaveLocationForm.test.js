@@ -36,7 +36,7 @@ it("renders without crashing", function() {
 });
 
 describe("SaveLocation Form", () =>{
-  it("redirects on successful submit", function() {
+  it("redirects on successful submit", async function() {
     const mockHistory = {
       push: jest.fn(),
 }
