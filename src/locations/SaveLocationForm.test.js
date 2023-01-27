@@ -1,12 +1,11 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
-import { Router } from "react-router";
+import { fireEvent, render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import SaveLocationForm from "./SaveLocationForm";
 import { UserProvider } from "../testUtils";
 import WeatherApi from "../api/api";
-import { useHistory } from "react-router-dom";
-import { createMemoryHistory } from "history";
+import { Router } from "react-router";
+
 history.replace = jest.fn();
 
 jest.mock("../api/api");
@@ -27,6 +26,7 @@ const location = {
     latt: "40.00583",
   },
 };
+
 it("renders without crashing", function() {
   render(
     <UserProvider>
@@ -35,12 +35,31 @@ it("renders without crashing", function() {
   );
 });
 
-// it("redirects on successful submit", function() {
-//   render(
-//     <Router history={history}>
-//       <UserProvider>
-//         <SaveLocationForm apiResponse={location} />
-//       </UserProvider>
-//     </Router>
-//   );
-// });
+describe("SaveLocation Form", () =>{
+  it("redirects on successful submit", function() {
+    const mockHistory = {
+      push: jest.fn(),
+}
+  await act(async () => {
+    render(
+      <UserProvider>
+        <Router history={mockHistory}>
+          <SaveLocationForm apiResponse={location} />
+        </Router>
+      </UserProvider>
+    )
+
+  //simulate filling up the textbox
+  const locationNameInput = screen.getByRole("textbox");
+  fireEvent.change(locationNameInput, { target: { value: "philadelphia" } });
+  expect(locationNameInput.value).toBe("philadelphia");
+
+  //click the button
+  const submitBtn = screen.getByRole("button", { name: "Submit" });
+  expect(submitBtn).not.toBeDisabled();
+  userEvent.click(submitBtn);
+});
+expect(mockHistory.push).toBeCalledTime(1)
+expect(mockHistory.push).toBeCalledWith("/locations")
+})
+})
