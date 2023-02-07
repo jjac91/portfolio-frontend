@@ -43,3 +43,20 @@ it("renders without crashing", async function() {
     );
   });
 });
+
+it("shows locations", async function() {
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <UserProvider>
+            <SavedLocationsList />
+          </UserProvider>
+        </MemoryRouter>
+      );
+      expect(
+        await screen.findByText(
+          "Philly",
+        )
+      ).toBeVisible();
+    });
+  });
