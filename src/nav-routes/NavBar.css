@@ -3,12 +3,12 @@
   border-bottom: 2px solid rgba(0, 0, 0, 0.125);
 }
 .navbar-brand{
-  color: aqua;
+  color: black;
 }
 .nav-link{
-  color: aqua;
+  color: black;
 }
 .nav-link.active {
   font-weight: bold;
-  color: black;
+  color: brown;
 }

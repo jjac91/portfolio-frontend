@@ -10,6 +10,19 @@ function NewLocation() {
   const [apiResponse, setApiResponse] = useState(null);
   const [errors, setErrors] = useState([]);
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  function handleSubmit(evt) {
+    // prevents searcing for only white spaces and trims off extra whitepace
+    evt.preventDefault();
+    search(searchTerm.trim() || undefined);
+    setSearchTerm(searchTerm.trim());
+  }
+
+  function handleChange(evt) {
+    setSearchTerm(evt.target.value);
+  }
+
   /**Calls the api to search for location info */
   async function search(name) {
     setLoaded(false);
@@ -87,7 +100,7 @@ function NewLocation() {
         <p className="lead mb-3 mt-3 ml-3 mr-3 font-weight-bold">
           Look up an address, city, or region in order to track its weather
         </p>
-        <SearchForm searchFor={search} placeHolder={"Enter location here"} />
+        <SearchForm placeHolder={"Enter location here"} submit={handleSubmit} change={handleChange} val={searchTerm} />
         {apiResponse ? handleSearchResult(apiResponse) : <div />}
 
         {errors.length ? <Alert type="danger" messages={errors} /> : null}

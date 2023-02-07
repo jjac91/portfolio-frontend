@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 /**General search bar
  *
@@ -9,31 +9,19 @@ import React, { useState } from "react";
  * searchFor function provided by a parent component.
  */
 
-function SearchForm({ searchFor, placeHolder }) {
-  console.debug("SearchForm", "searchFor=", typeof searchFor);
+function SearchForm({ placeHolder, submit, change, val }) {
 
-  const [searchTerm, setSearchTerm] = useState("");
-
-  function handleSubmit(evt) {
-    // prevents searcing for only white spaces and trims off extra whitepace
-    evt.preventDefault();
-    searchFor(searchTerm.trim() || undefined);
-    setSearchTerm(searchTerm.trim());
-  }
-
-  function handleChange(evt) {
-    setSearchTerm(evt.target.value);
-  }
+  
 
   return (
     <div className="SearchForm mb-3 mt-1.5 ml-3 mr-3">
-      <form className="form-inline" onSubmit={handleSubmit}>
+      <form className="form-inline" onSubmit={submit}>
         <input
           className="form-control form-control-lg flex-grow-1"
           name="searchTerm"
           placeholder={placeHolder}
-          value={searchTerm}
-          onChange={handleChange}
+          value={val}
+          onChange={change}
         />
         <button type="submit" className="btn btn-lg btn-primary">
           Submit

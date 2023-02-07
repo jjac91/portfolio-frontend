@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import UserContext from "../auth/UserContext";
 import WeatherApi from "../api/api";
+import SearchForm from "../common/SearchForm";
 import { useHistory } from "react-router-dom";
 
 
@@ -16,11 +17,14 @@ function SaveLocationForm({apiResponse, handleErrorChange}) {
     longt: apiResponse.locationData.longt,
     latt: apiResponse.locationData.latt,
   };
-  
+
   console.log("save location form", apiResponse);
   const { currentUser } = useContext(UserContext);
   const [label, setLabel] = useState("");
-
+/**Handles submitting of the form, attaches the user derived label from the from
+ * to the location object and then submits it to the backend if it fails.
+ * Posts errors to the the parent component if they occur
+ */
   async function handleSubmit(evt) {
     evt.preventDefault();
     const data = { ...initialData, label: label };
@@ -39,21 +43,7 @@ function SaveLocationForm({apiResponse, handleErrorChange}) {
   }
 
   return (
-   <div className="SearchForm  mb-3 mt-1.5 ml-3 mr-3">
-      <form className="form-inline" onSubmit={handleSubmit}>
-        <input
-           className="form-control form-control-lg flex-grow-1"
-          name="label"
-          placeholder="Enter Location name.."
-          value={label}
-          onChange={handleChange}
-        />
-
-        <button type="submit" className="btn btn-lg btn-primary">
-          Submit
-        </button>
-      </form> 
-    </div>
+    <SearchForm placeHolder={"Enter Location name..."} submit={handleSubmit} change={handleChange} val={label} />
   );
 }
 

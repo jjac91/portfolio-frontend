@@ -12,14 +12,27 @@ function LocationDetails() {
   const [advice, setAdvice] = useState(null);
   const [hasError, setHasError] = useState(false);
 
+  /**runs on mount to get the location details from the backend using
+   * the user's username and the location from the parameters.
+   * Sets an error if unable to retrieve location data
+   */
   useEffect(function getLocationDetails() {
     async function getLocation() {
-      setLocation(await WeatherApi.getLocation(username, id));
+      try {
+        setLocation(await WeatherApi.getLocation(username, id));
+      } catch {
+        setHasError(true);
+      }
     }
 
     getLocation();
   }, []);
 
+  /**Runs after the location state is changed to get the 
+   * weather details and advice from the backend using
+   * the location state and sets the states for weather and advice
+   * Will set an error if unable to get a response from the backend
+   */
   useEffect(
     function getweatherDetails() {
       async function getWeather() {
@@ -42,17 +55,19 @@ function LocationDetails() {
     [location]
   );
 
-  console.log("Locd details", weather, advice);
-
+/**Makes an Alert if an error state is set from the UseEffect functions */
   if (hasError === true) {
     return (
       <Alert
-      type="danger"
-      messages={["Unable to process the request, please try again later."]}
-    />
+        type="danger"
+        messages={["Unable to process the request, please try again later."]}
+      />
     );
   }
 
+  /**If advice is set, meaning all states needed for the component are set
+   *  returns the entire location component OR a loading loading spinner if 
+   * advice isn't yet set */
   return (
     <div>
       {advice ? (
@@ -66,7 +81,7 @@ function LocationDetails() {
                 It is currently experiencing:
                 <img
                   src={`http://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`}
-                />{" "}
+                 alt={weather.current.weather[0].description}/>{" "}
                 {weather.current.weather[0].description}
               </h4>
 

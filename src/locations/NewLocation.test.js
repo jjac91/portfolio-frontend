@@ -10,6 +10,7 @@ jest.mock("../api/api");
 beforeEach(() => {
   WeatherApi.getNewLocation.mockClear();
 });
+
 const location = {
     locationData: {
       stNumber: null,
