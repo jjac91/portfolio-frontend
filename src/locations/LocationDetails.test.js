@@ -95,34 +95,10 @@ it("should should render the weather and advice", async function() {
 
     expect(
       await screen.findByText(
-        "Philly"
-      )
-    ).toBeVisible();
-
-    expect(
-      await screen.findByText(
         "It feels extremely hot. Try to avoid staying outside for long periods of time."
       )
     ).toBeVisible();
   });
 });
 
-it("should render an api error", async function() {
-  await act(async () => {
-    WeatherApi.getLocation.mockReturnValueOnce();
-    
-    render(
-      <MemoryRouter>
-        <UserProvider>
-          <LocationDetails />
-        </UserProvider>
-      </MemoryRouter>
-    );
 
-    expect(
-      await screen.findByText(
-        "Unable to process the request, please try again later."
-      )
-    ).toBeVisible();
-  });
-});

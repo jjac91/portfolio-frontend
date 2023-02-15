@@ -35,31 +35,3 @@ it("renders without crashing", function() {
   );
 });
 
-// describe("SaveLocation Form", () =>{
-//   it("redirects on successful submit", async function() {
-//     const mockHistory = {
-//       push: jest.fn(),
-// }
-//   await act(async () => {
-//     render(
-//       <UserProvider>
-//         <Router history={mockHistory}>
-//           <SaveLocationForm apiResponse={location} />
-//         </Router>
-//       </UserProvider>
-//     )
-
-//   //simulate filling up the textbox
-//   const locationNameInput = screen.getByRole("textbox");
-//   fireEvent.change(locationNameInput, { target: { value: "philadelphia" } });
-//   expect(locationNameInput.value).toBe("philadelphia");
-
-//   //click the button
-//   const submitBtn = screen.getByRole("button", { name: "Submit" });
-//   expect(submitBtn).not.toBeDisabled();
-//   userEvent.click(submitBtn);
-// });
-// expect(mockHistory.push).toBeCalledTime(1)
-// expect(mockHistory.push).toBeCalledWith("/locations")
-// })
-// })

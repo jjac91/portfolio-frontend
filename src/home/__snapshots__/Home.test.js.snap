@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Homepage"
+  >
+    <div
+      class="container col-md-6 offset-md-3 col-lg-4 offset-lg-4 text-center"
+    >
+      <div
+        class="card"
+      >
+        <h1
+          class="mb-4 font-weight-bold"
+        >
+          Weather Advisor
+        </h1>
+        <p
+          class="lead font-weight-bold"
+        >
+          Track the weather in your favorite places and get advice on it
+        </p>
+        <h2>
+          Welcome Back, testuser!
+        </h2>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`matches snapshot when logged out 1`] = `
+<DocumentFragment>
+  <div
+    class="Homepage"
+  >
+    <div
+      class="container col-md-6 offset-md-3 col-lg-4 offset-lg-4 text-center"
+    >
+      <div
+        class="card"
+      >
+        <h1
+          class="mb-4 font-weight-bold"
+        >
+          Weather Advisor
+        </h1>
+        <p
+          class="lead font-weight-bold"
+        >
+          Track the weather in your favorite places and get advice on it
+        </p>
+        <p
+          class="mt-4 "
+        >
+          <a
+            class="btn btn-primary font-weight-bold mr-3"
+            href="/login"
+          >
+            Log in
+          </a>
+          <a
+            class="btn btn-primary font-weight-bold"
+            href="/signup"
+          >
+            Sign up
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
