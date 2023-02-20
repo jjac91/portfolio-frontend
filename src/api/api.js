@@ -10,11 +10,10 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
  */
 
 class WeatherApi {
-  // the token for interactive with the API will be stored here.
+  // the token for interactions with the API will be stored here.
   static token;
 
   static async request(endpoint, data = {}, method = "get") {
-    console.debug("API Call:", endpoint, data, method);
 
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${WeatherApi.token}` };
