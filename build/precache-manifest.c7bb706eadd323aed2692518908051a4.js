@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "008e8db684c08dcf0a63",
+    "revision": "3124f53013df2db8ac84",
     "url": "/static/css/main.9aa2543b.chunk.css"
   },
   {
-    "revision": "008e8db684c08dcf0a63",
-    "url": "/static/js/main.008e8db6.chunk.js"
+    "revision": "3124f53013df2db8ac84",
+    "url": "/static/js/main.3124f530.chunk.js"
   },
   {
     "revision": "6139b35fe5cf241061ac",
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/static/media/daniel-gregoire-GCfcjwmajf4-unsplash.4e6946eb.jpg"
   },
   {
-    "revision": "a8c57c0f7f9057a0e12058c0da339fcb",
+    "revision": "507cc98437f839ae53d546a9ca20e4b7",
     "url": "/index.html"
   }
 ];

@@ -14,7 +14,6 @@ class WeatherApi {
   static token;
 
   static async request(endpoint, data = {}, method = "get") {
-
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${WeatherApi.token}` };
     const params = method === "get" ? data : {};
@@ -63,21 +62,21 @@ class WeatherApi {
     return res.apiResponse;
   }
 
-   /** Get Saved Location */
-   static async getLocation(username, id) {
+  /** Get Saved Location */
+  static async getLocation(username, id) {
     let res = await this.request(`location/${username}/${id}`);
     return res.location;
   }
 
   /** Delete Location */
-  static async deleteLocation(username,id) {
+  static async deleteLocation(username, id) {
     let res = await this.request(`location/${username}/${id}`, {}, "delete");
     return res;
   }
 
   /** Get Weather */
   static async getWeather(lat, lon) {
-    let res = await this.request(`weather?lat=${lat}&lon=${lon}`);
+    let res = await this.request(`weather/`, { lat: lat, lon: lon }, "get");
     return res;
   }
 }

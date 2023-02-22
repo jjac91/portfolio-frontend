@@ -11,7 +11,7 @@ function Home() {
         <div className="card">
           <h1 className="mb-4 font-weight-bold">Weather Advisor</h1>
           <p className="lead font-weight-bold">
-            Track the weather in your favorite places and get advice on it
+            Track the weather in your favorite places and get advice on it!
           </p>
           {currentUser ? (
             <h2>Welcome Back, {currentUser.username}!</h2>
