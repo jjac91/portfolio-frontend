@@ -12,7 +12,7 @@ The ability to look up a location from a basic search term and then get the weat
 
 The ability to save a location to a user account. This was implemented to allow users to easily check the weather for a location without having to look up the location again.
 
-Tests for the frontend are contained in the same folders as their source components and can be run with npm test. Likewise the tests for the backend are located in the folder with the relevant function. They should be run with jest --i
+Tests for the frontend are contained in the same folders as their source components and can be run with npm test. Likewise the tests for the backend are located in the folder with the relevant function. They should be run with jest --i after a test database is created.  The necessary databases can be created with the listmaker.sql file in the backend
 
 The standard user flow is as follows:
 Upon first entering the site a new user should create an account.
